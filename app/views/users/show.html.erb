@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-xs-3">
+    <h2>User info</h2>
+    <%= render 'info', user: current_user,now: ''%>
+    <h2>New book</h2>
+    <%= render 'posts/form' %>
+  </div>
+
+
+</table>
+
+  <div class="col-xs-9">
+    <h2>Book detail</h2>
+    <table class="table">
+      
+      <% @posts.each do |post| %>      
+        <tr>
+          <td><%= link_to(post.user) do %>
+        <% if post.image? %>
+    　     <td><%=  image_tag post.image.url%></td>
+    　   <% else %>
+    　      <td><%=  image_tag "no_image300" %></td>
+        <% end %>
+            <%= post.user.name %>
+            <% end %>
+          </td>
+          <td><%= link_to post.title, post %></td>
+          <td><%= post.body %></td>
+
+          <% if post.user.id == current_user.id %>
+            <td><%= link_to 'Edit', edit_post_path(post) %></td>
+            <td><%= link_to 'Destroy', post, method: :delete, data: {confirm: '本当に消しますか？'},class: 'btn-sm btn-danger' %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    
+    </table>
+  </div>
+</div>
+
+
+<%# @posts.each do |post| %>
+
+    <!-- <h4 class="user" style="margin-top: 100px;"> -->
+      <!-- <span class="user-id"><%#= post.title %></span> -->
+    <!-- </h4> -->
+
+    <!-- <div class="post-body"> -->
+        <%#= post.body %>
+    <!-- </div> -->
+
+<%# end %>
+  

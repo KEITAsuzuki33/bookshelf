@@ -1,0 +1,27 @@
+<div class='row'>
+  <% users.each do |user| %>
+    <div class='col-lg-3'>
+	      <%= link_to(user) do %>
+	        <img src="image.png"><br>
+	      <% end %>
+	      <%= user.name %>
+	      <% if current_user.id != user.id %>
+		      <% if user.passive_relationships.where(following_id: current_user.id).blank? %>
+		      <%#= binding.pry %>
+		      	<%= link_to 'UnFollow',user_relationships_path(user), method: :post, class: 'btn btn-default' %>
+		      <% else %>
+			     <%= link_to 'Following',user_relationships_path(user),method: :delete,class: 'btn btn-primary' %>
+			  <% end %>
+	      <% end %>
+			  <br>
+			  <br>
+			  <%#= user.introduction %>
+			  <br>
+			  <br>
+    </div>
+  <% end %>
+</div>
+
+
+<%#= link_to 'follows',follows_user_path(@user)%>
+<%#= link_to 'followers',followers_user_path(@user)%>

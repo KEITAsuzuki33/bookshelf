@@ -1,0 +1,32 @@
+<table class='table'>
+      <tr>
+    	  <th>name</th>
+    	  <th><%= user.name %></th>
+      </tr>
+      <tr>
+    	  <th>introduction</th>
+    	  <th><%= user.introduction %></th>
+      </tr>
+</table>  
+   
+
+<table class='table'>
+    <div class="row">
+      <%= link_to user_path(user),class: "btn btn-#{@boo} col-lg-6" do %>
+        <strong><%= user.posts.count%></strong> books
+      <% end %>
+
+      <%= link_to favorites_path(user),class: "btn  btn-#{@fav} col-lg-6" do %>
+        <strong><%= user.favorites.count %></strong> favorites
+      <% end %>
+
+      <% if correct_user?(user) %>
+        <%= link_to '',edit_user_registration_path(user),class: 'col-xs-12 btn btn-default glyphicon glyphicon-wrench' %>
+      <% else %>
+        <% if user.followed_by?(current_user) %>
+          <%= link_to "following",user_relationships_path(user),method: :delete,class: "btn btn-primary col-lg-4",remote: true %>
+        <% else %>
+          <%= link_to "follow",user_relationships_path(user),method: :post,class: "btn btn-default col-lg-4",remote: true %>
+        <% end %>
+      <% end  %>
+     </table>   

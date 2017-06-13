@@ -1,0 +1,28 @@
+
+
+<%= form_with(model: @post, local: true) do |form| %>
+  
+  <div class="field">
+    <%= form.label :title %><br>
+    <%= form.text_field :title, id: :post_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :body %><br>
+    <%= form.text_area :body, id: :post_body %>
+  </div>
+
+
+  <div class="field">
+    <%= form.label :image %><br>
+    <%= form.file_field :image %>
+  </div>
+
+
+  <div class="actions row">
+    <%= form.submit class: 'btn btn-primary col-xs-12'%>
+  </div>
+
+
+
+<% end %>

@@ -1,0 +1,49 @@
+<div class="row">
+	
+	<div class="col-md-3">
+		<h2>User info</h2>
+		<%= render 'users/info', user: current_user,now: ''%>
+
+		<h2>New Books</h2>
+		<%= render 'posts/form' %>
+	</div>
+
+
+
+<h2>Favorites</h2>
+<div class="col-md-9">
+   <table class="table">
+	  <thead>
+          <tr>
+            <th>image</th>
+            <th>Title</th>
+            <th>Body</th>
+          </tr>
+
+      <tbody>
+        <% current_user.favorites.each do |favorite| %>
+          <tr>
+        	<% if favorite.post.image? %>
+         		<td><%=  image_tag favorite.post.image.url%></td>
+       		<% else %>
+         		<td><%=  image_tag "no_image300" %></td>
+        	<% end %>
+            <td><%= link_to favorite.post.title, post_path(favorite.post.id) %></td>
+            <td><%= favorite.post.body %></td>
+
+            <% if Favorite.find_by(user_id: current_user.id,post_id: favorite.post.id).nil? %>
+                <td><%= link_to "", post_favorites_path(favorite.post),method: :post ,class: 'glyphicon glyphicon-heart-empty'%><%= favorite.post.count %>いいね!</td>
+            <% else %>
+                <td><%= link_to "", post_favorites_path(favorite.post), method: :delete,class: 'glyphicon glyphicon-heart' %><%#= favorite.post.count %>いいね!</td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+
+
+
+
+
+		  
